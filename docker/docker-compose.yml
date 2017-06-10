@@ -1,6 +1,5 @@
 version: "3"
 services:
-
   mongo:
     image: mongo:3.4.4
 
@@ -28,7 +27,6 @@ services:
       - /var/lib/mongo/db/tokens
     depends_on:
       - mongo
-      - subscription-api
 
   core-api:
     image: rezme/resume-core-api
@@ -43,4 +41,3 @@ services:
       - /var/lib/mongo/db/resume
     depends_on:
       - mongo
-      - token-api
