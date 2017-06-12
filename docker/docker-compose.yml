@@ -36,14 +36,10 @@ services:
     depends_on:
       - mongo
 
-  nginx:
-    image: nginx:1.13.1-alpine
+  proxy-api:
+    image: rezme/resume-proxy-api:v0.0.1
     ports:
       - 80:80
-    volumes:
-      - ./etc/nginx/proxy.conf:/etc/nginx/proxy.conf
-      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./etc/nginx/conf.d:/etc/nginx/conf.d
     links:
       - core-api
       - subscription-api
