@@ -4,7 +4,7 @@ services:
     image: mongo:3.4.4
 
   subscription-api:
-    image: rezme/resume-subscription-api
+    image: rezme/resume-subscription-api:v0.0.1
     environment:
       - APP_PORT=80
       - MONGO_URI=mongodb://mongo/subscrition
@@ -14,7 +14,7 @@ services:
       - mongo
 
   token-api:
-    image: rezme/resume-token-api
+    image: rezme/resume-token-api:v0.0.1
     environment:
       - APP_PORT=80
       - MONGO_URI=mongodb://mongo/tokens
@@ -25,7 +25,7 @@ services:
       - mongo
 
   core-api:
-    image: rezme/resume-core-api
+    image: rezme/resume-core-api:v0.0.1
     environment:
       - APP_PORT=80
       - MONGO_URI=mongodb://mongo/resume
