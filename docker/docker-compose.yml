@@ -2,27 +2,23 @@ version: "3"
 services:
   mongo:
     image: mongo:3.4.4
+    volumes:
+      - data_db:/data/db
 
   subscription-api:
     image: rezme/resume-subscription-api:v0.0.1
     environment:
       - APP_PORT=80
-      - MONGO_URI=mongodb://mongo/subscrition
-    volumes:
-      - /var/lib/mongo/db/subscription
+      - MONGO_URI=mongodb://mongo/subscription
     depends_on:
       - mongo
 
   token-api:
-    image: rezme/resume-token-api:v0.0.1
+    image: rezme/resume-token-api:v0.1.0
     environment:
       - APP_PORT=80
-      - MONGO_URI=mongodb://mongo/tokens
       - JWT_SECRET=foo_bar
-    volumes:
-      - /var/lib/mongo/db/tokens
-    depends_on:
-      - mongo
+      - JWT_EXPIRES_IN=60
 
   core-api:
     image: rezme/resume-core-api:v0.0.1
@@ -31,8 +27,6 @@ services:
       - MONGO_URI=mongodb://mongo/resume
       - JWT_TOKEN_HEADER=x-jwt-token
       - JWT_SECRET=foo_bar
-    volumes:
-      - /var/lib/mongo/db/resume
     depends_on:
       - mongo
 
@@ -44,3 +38,5 @@ services:
       - core-api
       - subscription-api
       - token-api
+volumes:
+  data_db:
